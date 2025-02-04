@@ -13,11 +13,29 @@ const Orders = observer(() => {
     const router = useRouter();
     const orderStore = useOrder();
 
+
     useEffect(() => {
+        const ws = new WebSocket('ws://localhost:3415');
+        ws.onopen = () => {
+            console.log("Connected to ws");
+        }
+
+        ws.onmessage = async (event) => {
+            if (event.data) {
+                console.log(event.data);
+                const obj = JSON.parse(event.data)
+                if (obj && obj.type === 'confirmedOrder' && obj.saleInvoices) {
+                    await orderStore?.getOrders();
+                }
+            }
+        }
         const fetchData = async () => {
             await orderStore?.getOrders();
         }
         fetchData();
+        return () => {
+            ws.close();
+        };
     }, [])
 
     const orderOption = [

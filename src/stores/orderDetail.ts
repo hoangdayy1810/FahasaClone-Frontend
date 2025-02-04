@@ -26,7 +26,6 @@ class OrderDetailStore {
     async getCartDetail(cartDetail: any) {
         try {
             if (cartDetail) {
-                console.log('cartDetail', cartDetail);
                 runInAction(() => {
                     this.cartDetail = cartDetail;
                 })
@@ -43,7 +42,6 @@ class OrderDetailStore {
     async getSelectedCartDetail(cartDetail: any) {
         try {
             if (cartDetail) {
-                console.log('selectcartDetail', cartDetail);
                 runInAction(() => {
                     this.selectedCartDetail = cartDetail;
                 })
