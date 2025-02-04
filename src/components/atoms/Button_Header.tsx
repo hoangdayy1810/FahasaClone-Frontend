@@ -17,12 +17,12 @@ const Button_Header: React.FC<MyComponentProps> = observer(({ src, text, style, 
     const userStore = useUser();
     const orderStore = useOrder();
     const orderDetailStore = useOrderDetail();
-    const ws = new WebSocket('ws://localhost:3415');
+
 
     const [numProd, setNumProd] = useState('0');
     const [isClient, setIsClient] = useState(false);
     useEffect(() => {
-
+        const ws = new WebSocket('ws://localhost:3415');
         ws.onopen = () => {
             console.log("Connected to ws");
         }
